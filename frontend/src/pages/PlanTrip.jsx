@@ -43,7 +43,7 @@ export default function PlanTrip({ showNavbar = true }) {
         console.log("Form Data Submitted:", formData);
 
         try {
-            const response = await axios.post("http://localhost:5000/api/ai-planner/plan", {
+            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/ai-planner/plan`, {
                 destination: formData.destination,
                 days: formData.days,
                 budget: formData.budget,

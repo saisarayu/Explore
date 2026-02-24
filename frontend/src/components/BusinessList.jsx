@@ -4,11 +4,13 @@ import axios from "axios";
 export default function BusinessList() {
     const [businesses, setBusinesses] = useState([]);
     const [loading, setLoading] = useState(true);
+    const baseUrl = import.meta.env.VITE_API_BASE_URL;
+
 
     useEffect(() => {
         const fetchBusinesses = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/business");
+                const response = await axios.get(`${baseUrl}/business`);
                 setBusinesses(response.data);
             } catch (error) {
                 console.error("Error fetching businesses:", error);
@@ -52,7 +54,7 @@ export default function BusinessList() {
                                 <div className="relative h-64 overflow-hidden">
                                     {biz.imageUrl ? (
                                         <img
-                                            src={`http://localhost:5000${biz.imageUrl}`}
+                                            src={`${baseUrl.replace("/api", "")}${biz.imageUrl}`}
                                             alt={biz.name}
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                         />

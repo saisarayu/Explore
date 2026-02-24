@@ -4,11 +4,13 @@ import axios from "axios";
 export default function SpotList({ isHeroPreview = false, limit = 0 }) {
     const [spots, setSpots] = useState([]);
     const [loading, setLoading] = useState(true);
+    const baseUrl = import.meta.env.VITE_API_BASE_URL.replace("/api", "");
+
 
     useEffect(() => {
         const fetchSpots = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/spots");
+                const response = await axios.get(`${baseUrl}/spots`);
                 let data = response.data;
                 if (limit > 0) data = data.slice(0, limit);
                 setSpots(data);
@@ -42,7 +44,7 @@ export default function SpotList({ isHeroPreview = false, limit = 0 }) {
                         <div className="h-32 relative">
                             {spot.imageUrl ? (
                                 <img
-                                    src={`http://localhost:5000${spot.imageUrl}`}
+                                    src={`${baseUrl}${spot.imageUrl}`}
                                     alt={spot.title}
                                     className="w-full h-full object-cover"
                                 />
@@ -88,7 +90,7 @@ export default function SpotList({ isHeroPreview = false, limit = 0 }) {
                                 <div className="relative h-56 overflow-hidden">
                                     {spot.imageUrl ? (
                                         <img
-                                            src={`http://localhost:5000${spot.imageUrl}`}
+                                            src={`${baseUrl}${spot.imageUrl}`}
                                             alt={spot.title}
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                         />

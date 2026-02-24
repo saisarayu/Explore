@@ -24,7 +24,7 @@ export default function BusinessPromotion({ showNavbar = true }) {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post("http://localhost:5000/api/business", formData);
+            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/business`, formData);
             if (response.status === 201) {
                 setSubmitted(true);
             }

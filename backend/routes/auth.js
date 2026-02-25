@@ -101,15 +101,8 @@ router.post("/signup", async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, password: hashedPassword });
 
-    res.status(201).json({
-      success: true,
-      message: "User registered successfully",
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email
-      }
-    });
+    // Send token so user is automatically logged in
+    sendToken(user, 201, res);
   } catch (error) {
     return next(new ErrorHandler(error.message, 500));
   }

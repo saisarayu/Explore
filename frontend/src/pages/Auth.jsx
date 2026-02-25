@@ -58,16 +58,23 @@ export default function Auth() {
             const response = await axios.post(url, payload);
 
             if (response.data.success) {
+                // Store token for both login and signup
+                localStorage.setItem("token", response.data.token);
+
                 if (isLogin) {
-                    localStorage.setItem("token", response.data.token);
-                    navigate("/explore"); // Redirect to Explore after login
+                    navigate("/explore");
                 } else {
                     alert("Account created successfully!");
                     navigate("/explore");
                 }
             }
         } catch (err) {
-            setError(err.response?.data?.message || "Something went wrong. Please try again.");
+            console.error("Auth Error:", err);
+            if (err.code === "ERR_NETWORK") {
+                setError("Network Error: Could not connect to the server. Please check your internet or if the backend is running.");
+            } else {
+                setError(err.response?.data?.message || "Something went wrong. Please try again.");
+            }
         } finally {
             setLoading(false);
         }

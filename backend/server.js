@@ -75,7 +75,7 @@ app.use("/api/ai", aiDescriptionRoutes); // 👈 add this
 
 
 // Mount the spots route (ShareExperience)
-app.use("/spots", spotsRoutes);
+app.use("/api/spots", spotsRoutes);
 
 // GLOBAL ERROR HANDLER
 app.use((err, req, res, next) => {

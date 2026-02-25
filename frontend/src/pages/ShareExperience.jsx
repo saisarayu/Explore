@@ -41,7 +41,7 @@ export default function ShareExperience({ showNavbar = true }) {
         }
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL.replace("/api", "")}/spots`, data, {
+            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/spots`, data, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
